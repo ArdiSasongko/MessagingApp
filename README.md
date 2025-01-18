@@ -1,31 +1,77 @@
-# Fiber Bootstrap
-Fiber bootstrap for rapid development using Go-Fiber / Gorm / Validator.
+# ChatApp - Real-time Chat Application
 
-# Components
-* Fiber
-  * Html Engine Template
-  * Logger
-  * Monitoring
-* Gorm
-  * PGSQL Driver
-* Validator  
-* Env File
+This project serves as a practical implementation of building real-time applications using modern technologies. It was developed to demonstrate the understanding of web socket implementation, API development, and database management while serving as a portfolio piece. The application showcases the integration of Golang's powerful backend capabilities with MongoDB's flexible data storage and WebSocket's real-time communication features.
 
-# Router 
-API Router `/api` with rate limiter middleware  
-Http Router `/` with CORS and CSRF middleware  
+## Tech Stack
+- **Backend**: Go (Fiber Framework)
+- **Database**: 
+  - MongoDB (Chat Messages)
+  - PostgreSQL (User Data)
+- **Real-time Communication**: WebSocket
+- **Authentication**: JWT (JSON Web Tokens)
 
-# Setup
+## Features
 
-1. Copy the example env file over:
-    ```
-    cp .env.example .env
-    ```
+### Authentication System
+- **User Registration**: Secure signup process with email verification
+  - Password hashing using bcrypt
+  - Email validation
+  - Username uniqueness check
+  
+- **Login System**: JWT-based authentication
+  - Generates access token (24h validity)
+  - Generates refresh token (7 days validity)
+  - Secure password comparison
+  
+- **Token Management**:
+  - Refresh token rotation
+  - Access token renewal
+  - Token blacklisting for logout
+  
+- **Logout Mechanism**:
+  - Invalidates active tokens
+  - Clears session data
+  - Handles multi-device logout
 
-2. Modify the env file you just copied `.env` with the correct credentials for your database. Make sure the database you entered in `DB_NAME` has been created.
+### Real-time Chat Features
+- **WebSocket Implementation**:
+  - Persistent connection management
+  - Real-time message delivery
+  - Online status tracking
+  - Typing indicators
+  
+- **Message Management**:
+  - Real-time message sending and receiving
+  - Message history retrieval
+  - Read receipts
+  - Message pagination
 
-3. Run the API:
-    ```
-    go run main.go
-    ```
-Your api should be running at `http://localhost:4000/` if the port is in use you may modify it in the `.env` you just created.
+### Database Architecture
+- **PostgreSQL (User Data)**:
+  - User profiles
+  - Authentication records
+  - Account settings
+  - User relationships
+  
+- **MongoDB (Messages)**:
+  - Chat messages
+  - Media attachments
+  - Message metadata
+  - Chat history
+
+## API Endpoints
+
+### Authentication
+```
+POST /api/auth/register   - User registration
+POST /api/auth/login      - User login
+POST /api/auth/logout     - User logout
+POST /api/auth/refresh    - Refresh access token
+```
+
+### Chat Operations
+```
+WS   /ws/chat            - WebSocket connection endpoint
+GET  /api/messages       - Retrieve message history
+POST /api/messages       - Send new message
+```
