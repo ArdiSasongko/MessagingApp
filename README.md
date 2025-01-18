@@ -63,15 +63,15 @@ This project serves as a practical implementation of building real-time applicat
 
 ### Authentication
 ```
-POST /api/auth/register   - User registration
-POST /api/auth/login      - User login
-POST /api/auth/logout     - User logout
-POST /api/auth/refresh    - Refresh access token
+POST /user/v1/register   - User registration
+POST /user/v1/login      - User login
+POST /user/v1/logout     - User logout
+POST /user/v1/refresh-token    - Refresh access token
 ```
 
 ### Chat Operations
 ```
-WS   /ws/chat            - WebSocket connection endpoint
-GET  /api/messages       - Retrieve message history
-POST /api/messages       - Send new message
+WS   /ws/            - WebSocket connection endpoint
+GET  /message/v1/history       - Retrieve message history
+POST /message/v1/send       - Send new message
 ```
